@@ -30,22 +30,24 @@ kirby()->routes(array(
 
 			//if true, good; if false, zip creation failed
 			$filename = c::get('zip.default.filename', "archive") . '.zip';
-			$file = c::get('zip.path', "tmp/zip/") . $filename;
-			$result = create_zip($files_to_zip, $file);
+			$destination = c::get('zip.destination.path', "tmp/zip/") . $filename;
+
+			$result = create_zip($files_to_zip, $destination);
 
 			if( $result )
 			{
 				// Then download the zipped file.
 				header('Content-Type: application/zip');
 				header('Content-disposition: attachment; filename='.$filename);
-				header('Content-Length: ' . filesize($file));
-				readfile($file);
+				header('Content-Length: ' . filesize($destination));
+				readfile($destination);
 				// Delete the zipped file from the server.
-		    unlink($file);
+		    unlink($destination);
 			}
 			else
 			{
-				// Should display something
+				// Should display something better
+				die('Error');
 			}
 
 		}
@@ -82,10 +84,11 @@ function create_zip($files = array(),$destination = '',$overwrite = false) {
 		}
 		//add the files
 		foreach($valid_files as $file) {
+			$temp = basename(dirname($file)) .'-'. basename($file);
 			$zip->addFile($file, basename(dirname($file)) .'-'. basename($file));
 		}
 		//debug
-		//echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
+		// echo 'The zip archive contains ',$zip->numFiles,' files with a status of ',$zip->status;
 
 		//close the zip -- done!
 		$zip->close();
