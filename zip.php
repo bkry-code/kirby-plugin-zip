@@ -13,7 +13,7 @@
 // P R O V I D E   A   R O U T E
 kirby()->routes(array(
 	array(
-		'pattern' => c::get('zip.download.url'),
+		'pattern' => c::get('zip.download.url', 'download/archive'),
 		'method' => 'POST',
 		'action'  => function() {
 
