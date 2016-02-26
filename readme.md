@@ -21,12 +21,28 @@ You need PHP ZIP module enabled.
 
 ## Configure
 
-You can set different defaults parameters in your `config.php`.
-Like URL to download the ZIPs with `c::set('zip.download.url', "download/archive")`.
-Where to save ZIPs (include trailing slash) `c::set('zip.download.url', "download/archive")` and `c::set('zip.archive.path', "tmp/zip/")`.
-Also the ZIP filename with `c::set('zip.default.filename', "archive")`.
+You can set different defaults parameters in your `config.php` :
+- the route URL to download the ZIPs : `c::set('zip.download.url', "download/archive")`,
+- where to save ZIPs (include trailing slash) : `c::set('zip.download.url', "download/archive")` and `c::set('zip.archive.path', "tmp/zip/")`,
+- also the ZIP filename : `c::set('zip.default.filename', "archive")`.
 
 If you need individual case by ZIP, just edit the plugin ;).
+
+## Use
+
+Plugin needs a JSON object formatted like this:
+
+```
+{
+  page-hash : filename.ext,
+  page-hash : filename.ext,
+  …
+}
+```
+
+For now, plugin gets files by doing a `$site->index()->findBy('hash', page-hash)` then `$result_page->file(filename.ext)`.
+
+Use POST to the send the JSON to the `zip.download.url`. Default URL is `download/archive`.
 
 ## General infos
 
