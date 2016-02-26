@@ -48,7 +48,7 @@ Use POST to the send the JSON to the `zip.download.url`. Default URL is `downloa
 
 - :exclamation: I’m not a specialist about ZIP and PHP optimisation. If a lot of users start a ZIP generation at the same time, it will probably overload your server. Any advice appreciated.
 - ZIP can be conserved or not. Your call. Edit the plugin. *cf. line 44*
-- If user close the connection before the ZIP is generated, it stops the process, like a classic page displaying process.
+- If user close the connection before the ZIP is generated, it continue the process on your server and will save it, not matter your settings.
 - Filenames inside the archive are set `line 85`.
 
 ### TODO
