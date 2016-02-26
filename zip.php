@@ -49,26 +49,6 @@ kirby()->routes(array(
 			}
 
 		}
-	),
-	array(
-		'pattern' => c::get('download.display.url'),
-		'action'  => function() {
-
-			$datas = array(
-				'pouet' => "BEAMMM!"
-			);
-
-			$page = site()->page('templates');
-
-			tpl::$data = array_merge(tpl::$data, array(
-		    'kirby' => kirby(),
-		    'site'  => site(),
-		    'pages' => site()->pages(),
-		    'page' => $page
-			), $datas, kirby()->controller($page, $datas));
-
-      echo tpl::load(kirby()->roots()->templates() . DS . 'download-list.php');
-    }
 	)
 ));
 
