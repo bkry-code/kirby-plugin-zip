@@ -1,6 +1,6 @@
 <?php
 /**
- * Creates a compressed zip file from a list of files
+ * Creates a ZIP archive from a list of files
  *
  * @author Julien Gargot
  * @version 0.0.1
@@ -13,7 +13,7 @@
 // P R O V I D E   A   R O U T E
 kirby()->routes(array(
 	array(
-		'pattern' => c::get('download.generate.zip.url'),
+		'pattern' => c::get('zip.download.url'),
 		'method' => 'POST',
 		'action'  => function() {
 
@@ -29,8 +29,8 @@ kirby()->routes(array(
 			}
 
 			//if true, good; if false, zip creation failed
-			$filename = 'documents-atr.zip';
-			$file = 'tmp/'. $filename;
+			$filename = c::get('zip.default.filename', "archive") . '.zip';
+			$file = c::get('zip.path', "tmp/zip/") . $filename;
 			$result = create_zip($files_to_zip, $file);
 
 			if( $result )
@@ -50,26 +50,6 @@ kirby()->routes(array(
 
 		}
 	),
-	array(
-		'pattern' => c::get('download.display.url'),
-		'action'  => function() {
-
-			$datas = array(
-				'pouet' => "BEAMMM!"
-			);
-
-			$page = site()->page('templates');
-
-			tpl::$data = array_merge(tpl::$data, array(
-		    'kirby' => kirby(),
-		    'site'  => site(),
-		    'pages' => site()->pages(),
-		    'page' => $page
-			), $datas, kirby()->controller($page, $datas));
-
-      echo tpl::load(kirby()->roots()->templates() . DS . 'download-list.php');
-    }
-	)
 ));
 
 /**
