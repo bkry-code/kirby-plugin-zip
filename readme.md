@@ -23,7 +23,7 @@ You need PHP ZIP module enabled.
 
 You can set different defaults parameters in your `config.php` :
 - the route URL to download the ZIPs : `c::set('zip.download.url', "download/archive")`,
-- where to save ZIPs (include trailing slash) : `c::set('zip.download.url', "download/archive")` and `c::set('zip.archive.path', "tmp/zip/")`,
+- where to save ZIPs (include trailing slash) : `c::set('zip.archive.path', "tmp/zip/")`,
 - also the ZIP filename : `c::set('zip.default.filename', "archive")`.
 
 If you need individual case by ZIP, just edit the plugin ;).
